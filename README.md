@@ -6,6 +6,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 oscar.cutrin@gmail.com
 
+## Github Pages
+
+https://ocutrin.github.io/ngxs-crud-store/
+
 ## Stackblitz
 
 [Project demo](https://stackblitz.com/ocutrin/ngxs-crud-store)
