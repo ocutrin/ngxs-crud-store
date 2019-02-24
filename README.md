@@ -8,7 +8,7 @@ oscar.cutrin@gmail.com
 
 ## Github Pages
 
-https://ocutrin.github.io/ngxs-crud-store/
+(GithubIo)https://ocutrin.github.io/ngxs-crud-store/
 
 ## Stackblitz
 
