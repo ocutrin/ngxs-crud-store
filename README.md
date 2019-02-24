@@ -2,9 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
+## Author
+
+oscar.cutrin@gmail.com
+
+## Github Pages
+
+[Github IO](https://ocutrin.github.io/ngxs-crud-store/)
+
 ## Stackblitz
 
-https://stackblitz.com/ocutrin/ngxs-crud-store
+[Project demo](https://stackblitz.com/github/ocutrin/ngxs-crud-store)
 
 ## Development server
 
