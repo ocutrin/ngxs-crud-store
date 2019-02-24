@@ -12,7 +12,14 @@ export interface StateModel {
 
 export const initialState = {
   ids: [],
-  entities: []
+  entities: [],
+  selectedEntities: [],
+  form: {
+    model: undefined,
+    dirty: false,
+    status: '',
+    errors: {}
+  }
 };
 
 export interface StoreStateSelectors {
@@ -50,17 +57,19 @@ export class StoreState {
 
   @Action(new StoreActionFactory(key).search())
   search(context: StateContext<any>) {
+    const state = context.getState();
     return this.servicio.search().pipe(
       tap((res: any[]) => context.setState({
+        ...state,
         ids: res.map(r => r.id),
         entities: res,
       })));
   }
 
   @Action(new StoreActionFactory(key).create(null as any))
-  create(context: StateContext<any>, accion: ActionFactory) {
+  create(context: StateContext<any>, action: ActionFactory) {
     const state = context.getState();
-    return this.servicio.create(accion.payload).pipe(
+    return this.servicio.create(action.payload).pipe(
       tap((res: any) => {
         context.patchState({
           ids: [...state.ids, res.id],
@@ -69,6 +78,17 @@ export class StoreState {
       }), catchError(res => {
         return res;
       }));
+  }
+
+  @Action(new StoreActionFactory(key).selectedEntity(null as any))
+  selectedEntity(context: StateContext<any>, action: ActionFactory) {
+    const state = context.getState();
+    const unselectEntities = state.selectedEntities.filter(r => r.id === action.payload.id);
+    const unselect = unselectEntities.length === 0;
+    return context.patchState({
+      ...state,
+      selectedEntities: action.payload && unselect ? [action.payload] : []
+    });
   }
 
   // @Action(new StoreActionCrudFactory(crudStateName).update(null as any))
@@ -86,13 +106,13 @@ export class StoreState {
   // }
 
   @Action(new StoreActionFactory(key).delete(null as any))
-  delete(context: StateContext<any>, accion: ActionFactory) {
+  delete(context: StateContext<any>, action: ActionFactory) {
     const state = context.getState();
-    return this.servicio.delete(accion.payload).pipe(
+    return this.servicio.delete(action.payload).pipe(
       tap(() => {
         context.patchState({
-          ids: state.ids.filter(i => i.id !== accion.payload.id),
-          entities: state.entities.filter(i => i.id !== accion.payload.entities),
+          ids: state.ids.filter(i => i.id !== action.payload.id),
+          entities: state.entities.filter(i => i.id !== action.payload.entities),
         });
       }), catchError(res => {
 

@@ -30,6 +30,10 @@ export function createStorePlugin(storeKey: string) {
         return next(state, actionsStore.clearStore());
       }
 
+      if (action.type === actionsUsers.selectedEntity(null).type) {
+        return next(state, actionsStore.selectedEntity(action.payload));
+      }
+
     }
 
     return next(state, action);

@@ -26,6 +26,10 @@ export class StoreActionFactory {
     return createAction(this.tag, `CLEAR STORE`);
   }
 
+  selectedEntity(entity: any): ActionFactory {
+    return createAction(this.tag, `SELECTED ENTITY`, entity);
+  }
+
 }
 
 export interface ActionFactory {

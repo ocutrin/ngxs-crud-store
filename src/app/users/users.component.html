@@ -1,13 +1,29 @@
-
-
-
 <div class="top">
+
   <div class="nav">
     <a class="title">{{title}}</a>
     <a (click)="randomUser()">User Random </a>
     <a (click)="search()">Search</a>
     <a (click)="clear()">Clear</a>
   </div>
+
+  <form [formGroup]="form" class="form" ngxsForm="users.form">
+    <div class="form-control">
+      <input type="text" name="name" formControlName="name" placeholder="name">
+    </div>
+    <div class="form-control">
+      <input type="text" name="password" formControlName="password" placeholder="password">
+    </div>
+    <div class="form-control">
+      <label>Active</label>
+      <input type="checkbox" name="active" formControlName="active">
+    </div>
+    <div class="form-control">
+      <button type="button" class="btn btn-delete" (click)="delete()">Del</button>
+      <button type="button" class="btn btn-add" (click)="add()">Add</button>
+    </div>
+  </form>
+
   <table>
     <thead>
       <tr>
@@ -20,10 +36,10 @@
   </table>
 </div>
 
-<div class="tbl-content">
+<div class="center">
   <table>
     <tbody>
-      <tr *ngFor="let e of entities$ | async">
+      <tr *ngFor="let e of entities$ | async" (click)="selectRow(e)" [ngStyle]="isSelectRow(e)">
         <td>{{e.id}}</td>
         <td>{{e.name}}</td>
         <td>{{e.password}}</td>

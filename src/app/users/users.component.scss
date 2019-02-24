@@ -19,7 +19,7 @@
   display: block;
   color: white;
   text-align: center;
-  padding: 20px 20px;
+  padding: 20px;
   text-decoration: none;
   cursor: pointer;
 }
@@ -35,15 +35,48 @@
   cursor: unset !important;
 }
 
-
-table {
-  width: 100%;
+.form {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  padding: 10px;
+  justify-content: space-around;
 }
 
-.tbl-content {
+.form-control {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.form input {
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.form input[type=checkbox] {
+  margin: 10px;
+}
+
+.form label {
+  padding: 10px;
+  color: #fff;
+}
+
+.form button {
+  padding: 0 20px !important;
+}
+
+.center {
   height: 100vh;
   overflow-x: auto;
   margin-top: 110px;
+}
+
+table {
+  width: 100%;
 }
 
 table tr:nth-child(even) {
@@ -67,4 +100,23 @@ td {
 
 th {
   text-align: left;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.btn.btn-delete {
+  background-color: #f44336;
+}
+
+.btn.btn-add {
+  background-color: #4CAF50;
+
 }
