@@ -10,10 +10,6 @@ export class AppComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    for (const prop of window) {
-      console.log(window[prop]);
-    }
-
   }
 
 }
