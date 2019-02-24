@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from '../environments/environment.prod';
 import { AppRoutingRoutingModule } from './app-routing-routing.module';
 import { AppComponent } from './app.component';
 import { StorePluginModule } from './store/store-plugin.module';
