@@ -1,5 +1,5 @@
 {
-  "name": "acciones-dinamicas",
+  "name": "ngxs-crud-store",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "@ngxs/logger-plugin": "^3.3.4-dev.master-2696081",
+    "@ngxs/store": "^3.3.4-dev.master-2696081",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
@@ -29,9 +31,10 @@
     "@angular/cli": "~7.0.3",
     "@angular/compiler-cli": "~7.0.0",
     "@angular/language-service": "~7.0.0",
-    "@types/node": "~8.9.4",
+    "@ngxs/devtools-plugin": "^3.3.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

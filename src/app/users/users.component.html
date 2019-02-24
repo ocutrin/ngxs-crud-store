@@ -1,0 +1,34 @@
+
+
+
+<div class="top">
+  <div class="nav">
+    <a class="title">{{title}}</a>
+    <a (click)="randomUser()">User Random </a>
+    <a (click)="search()">Search</a>
+    <a (click)="clear()">Clear</a>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Password</th>
+        <th>Active</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+<div class="tbl-content">
+  <table>
+    <tbody>
+      <tr *ngFor="let e of entities$ | async">
+        <td>{{e.id}}</td>
+        <td>{{e.name}}</td>
+        <td>{{e.password}}</td>
+        <td>{{e.active}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

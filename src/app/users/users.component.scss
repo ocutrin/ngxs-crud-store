@@ -1,0 +1,70 @@
+.top {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  vertical-align: middle;
+  top: 0;
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+}
+
+.nav a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav a:hover:not(.title):not(.title) {
+  background-color: #4CAF50;
+}
+
+.title {
+  background-color: indianred;
+  padding: 16px 100px 16px 150px !important;
+  font-size: 150%;
+  cursor: unset !important;
+}
+
+
+table {
+  width: 100%;
+}
+
+.tbl-content {
+  height: 100vh;
+  overflow-x: auto;
+  margin-top: 110px;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+table th {
+  color: white;
+  background-color: cornflowerblue;
+}
+
+th,
+td {
+  padding: 15px;
+  width: calc(100vw/4);
+}
+
+th {
+  text-align: left;
+}
