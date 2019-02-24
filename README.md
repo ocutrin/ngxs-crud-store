@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Stackblitz
 
-https://stackblitz.com/ocutrin/ngxs-crud-store
+[Project demo](https://stackblitz.com/ocutrin/ngxs-crud-store)
 
 ## Development server
 
