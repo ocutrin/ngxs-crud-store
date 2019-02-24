@@ -12,7 +12,7 @@ oscar.cutrin@gmail.com
 
 ## Stackblitz
 
-[Project demo](https://stackblitz.com/ocutrin/ngxs-crud-store)
+[Project demo](https://stackblitz.com/github/ocutrin/ngxs-crud-store)
 
 ## Development server
 
