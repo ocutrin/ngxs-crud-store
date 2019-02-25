@@ -1,0 +1,136 @@
+.top {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  vertical-align: middle;
+  top: 0;
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+}
+
+.nav a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav a:hover:not(.title):not(.title) {
+  background-color: #4CAF50;
+}
+
+.title {
+  background-color: cornflowerblue;
+  padding: 16px 100px 16px 150px !important;
+  font-size: 150%;
+  cursor: unset !important;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  padding: 10px;
+  margin: 10px;
+  background-color: #bbb;
+  justify-content: space-around;
+  border: 2px solid #fff;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.form input {
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.form input[type=checkbox] {
+  margin: 10px;
+}
+
+.form label {
+  padding: 10px;
+  color: #fff;
+}
+
+.form button {
+  padding: 0 20px !important;
+}
+
+.center {
+  height: 100vh;
+  overflow-x: auto;
+  margin-top: 203px;
+}
+
+table {
+  width: 100%;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+table th {
+  color: white;
+  background-color: cornflowerblue;
+}
+
+th,
+td {
+  padding: 15px;
+  width: calc(100vw/4);
+}
+
+th {
+  text-align: left;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.btn.btn-delete {
+  background-color: #f44336;
+}
+
+.btn.btn-add {
+  background-color: #4CAF50;
+}
+
+.btn.btn-edit {
+  background-color: #f4d136;
+}
+
+.selected {
+  background-color: #ff7f50 !important;
+}
+
+.bar{
+  border: 2px solid #fff;
+}

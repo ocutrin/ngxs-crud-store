@@ -4,16 +4,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from '../environments/environment.prod';
 import { AppRoutingRoutingModule } from './app-routing-routing.module';
 import { AppComponent } from './app.component';
-import { StorePluginModule } from './store/store-plugin.module';
-import { UsersComponent } from './users/users.component';
+import { StorePluginModule } from './core/store/store-plugin.module';
+import { HomeComponent } from './views/home/home.component';
+import { UsersComponent } from './views/users/users.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +25,7 @@ import { UsersComponent } from './users/users.component';
     HttpClientModule,
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
+    NgxsRouterPluginModule.forRoot(),
     NgxsModule.forRoot([], { developmentMode: environment.production }),
     StorePluginModule.forRoot(UsersComponent.key),
     AppRoutingRoutingModule

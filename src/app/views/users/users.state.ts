@@ -1,5 +1,5 @@
 import { Actions, State } from '@ngxs/store';
-import { StateModel, initialState, StoreState } from '../store/store.state';
+import { initialState, StateModel, StoreState } from '../../core/store/store.state';
 import { UsersService } from './users.service';
 
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { StoreComponent } from '../store/store.component';
+import { StoreComponent } from '../../core/store/store.component';
 
 @Component({
   selector: 'app-users',

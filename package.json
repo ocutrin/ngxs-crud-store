@@ -22,6 +22,7 @@
     "@angular/router": "~7.2.6",
     "@ngxs/form-plugin": "^3.3.4",
     "@ngxs/logger-plugin": "^3.3.4-dev.master-2696081",
+    "@ngxs/router-plugin": "^3.3.4",
     "@ngxs/store": "^3.3.4-dev.master-2696081",
     "core-js": "^2.5.4",
     "rxjs": "~6.4.0",
