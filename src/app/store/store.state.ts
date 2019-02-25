@@ -23,8 +23,9 @@ export const initialState = {
 };
 
 export interface StoreStateSelectors {
-  ids: (state) => any;
-  entities: (state) => any;
+  ids: (state: StateModel) => any;
+  entities: (state: StateModel) => any;
+  error: (state: StateModel) => any;
 }
 
 export const key = 'store';
@@ -33,8 +34,9 @@ export class StoreState {
 
   static selectors(storeKey: string): StoreStateSelectors {
     return {
-      ids: (state) => StoreState.ids(state, storeKey),
-      entities: (state) => StoreState.entities(state, storeKey)
+      ids: (state: StateModel) => StoreState.ids(state, storeKey),
+      entities: (state: StateModel) => StoreState.entities(state, storeKey),
+      error: (state: StateModel) => StoreState.error(state, storeKey)
     };
   }
 
