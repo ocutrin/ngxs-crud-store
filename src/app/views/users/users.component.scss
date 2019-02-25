@@ -1,89 +1,17 @@
-.top {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background-color: #333;
-  vertical-align: middle;
-  width: 100%;
-}
-
-.button-bar {
+.table-header {
   display: flex;
   flex-direction: row;
-  flex-flow: row wrap;
-  background-color: #333;
-  justify-content: flex-end;
-}
-
-.button-bar a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.button-bar a:hover:not(.title):not(.title) {
-  background-color: #4CAF50;
-}
-
-.title {
-  background-color: cornflowerblue;
-  padding: 16px 150px 16px 100px !important;
-  font-size: 150%;
-  cursor: unset !important;
-}
-
-.form {
-  display: flex;
-  flex-direction: row;
-  flex-flow: row wrap;
-  padding: 10px;
-  margin: 10px;
-  background-color: #bbb;
-  justify-content: space-around;
-  border: 2px solid #fff;
-}
-
-.form-control {
-  display: flex;
-  flex-direction: row;
-  flex-flow: row wrap;
-  justify-content: center;
-  vertical-align: middle;
-}
-
-.form input {
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.form input[type=checkbox] {
-  margin: 10px;
-}
-
-.form label {
-  padding: 10px;
-  color: #fff;
-}
-
-.form button {
-  padding: 0 20px !important;
-}
-
-.center {
-  height: calc(100vh - 194px);
-  overflow-x: auto;
-  margin-bottom: 1px;
-}
-
-table {
-  width: 100%;
 }
 
 table tr:nth-child(even) {
   background-color: #eee;
+}
+
+table {
+  width: 100%;
+  padding: 2px;
+  border: 2px solid #000;
+  border-radius: 4px !important;
 }
 
 table tr:nth-child(odd) {
@@ -92,27 +20,18 @@ table tr:nth-child(odd) {
 
 table th {
   color: white;
-  background-color: cornflowerblue;
+  background-color: #f4d136;
 }
 
 th,
 td {
-  padding: 15px;
-  width: calc(100vw/4);
+  border-radius: 4px;
+  padding: 10px;
+  // width: calc(100vw/4);
 }
 
 th {
   text-align: left;
-}
-
-.btn {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
 }
 
 .btn.btn-delete {
@@ -128,9 +47,23 @@ th {
 }
 
 .selected {
-  background-color: #ff7f50 !important;
+  background-color: deepskyblue !important;
 }
 
-.bar {
-  border: 2px solid #fff;
-}
+
+// .form {
+//   display: flex;
+//   flex-direction: row;
+//   flex-flow: row wrap;
+//   padding: 10px;
+//   justify-content: space-around;
+// }
+
+// .form label {
+//   padding: 10px;
+//   color: #fff;
+// }
+
+// .bar {
+//   border: 2px solid #fff;
+// }

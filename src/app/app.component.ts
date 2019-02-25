@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor() { }
+  title = 'NGXS CRUD Store example';
+
+  constructor(public store: Store) { }
 
   ngOnInit() {
   }

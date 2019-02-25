@@ -1,27 +1,20 @@
+<!-- <form [formGroup]="form" class="form" ngxsForm="users.form">
+  <div class="form-control">
+    <input type="text" name="name" formControlName="name" placeholder="name">
+  </div>
+  <div class="form-control">
+    <input type="text" name="password" formControlName="password" placeholder="password">
+  </div>
+  <div class="form-control">
+    <label>Active</label>
+    <input type="checkbox" name="active" formControlName="active">
+  </div>
+  <div class="form-control bar">
+    <button type="button" class="btn btn-add" (click)="add()">Add</button>
+  </div>
+</form> -->
 
-
-<!-- <a class="title">{{title}}</a> -->
-<!-- <a (click)="clear()">Clear</a> -->
-
-
-<div class="top">
-
-  <form [formGroup]="form" class="form" ngxsForm="users.form">
-    <div class="form-control">
-      <input type="text" name="name" formControlName="name" placeholder="name">
-    </div>
-    <div class="form-control">
-      <input type="text" name="password" formControlName="password" placeholder="password">
-    </div>
-    <div class="form-control">
-      <label>Active</label>
-      <input type="checkbox" name="active" formControlName="active">
-    </div>
-    <div class="form-control bar">
-      <button type="button" class="btn btn-add" (click)="add()">Add</button>
-    </div>
-  </form>
-
+<div class="center">
   <table>
     <thead>
       <tr>
@@ -31,13 +24,9 @@
         <th>Active</th>
       </tr>
     </thead>
-  </table>
-</div>
-
-<div class="center">
-  <table>
     <tbody>
-      <tr *ngFor="let e of entities$ | async" (click)="selectRow(e)" [className]="getClassName(e)">
+      <tr *ngFor="
+      let e of entities$ | async" (click)="selectRow(e)" [className]="getClassName(e)">
         <td>{{e.id}}</td>
         <td>{{e.name}}</td>
         <td>{{e.password}}</td>
@@ -48,7 +37,8 @@
 </div>
 
 <div class="button-bar">
-  <a (click)="edit()">Edit</a>
-  <a (click)="delete()">Del</a>
-  <a (click)="search()">Search</a>
+  <button (click)="clear()">Clear Store</button>
+  <button (click)="edit()">Edit</button>
+  <button (click)="delete()">Del</button>
+  <button (click)="search()">Search</button>
 </div>
