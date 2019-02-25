@@ -39,7 +39,7 @@
 <div class="center">
   <table>
     <tbody>
-      <tr *ngFor="let e of entities$ | async" (click)="selectRow(e)" [className]="isSelectRow(e)">
+      <tr *ngFor="let e of entities$ | async" (click)="selectRow(e)" [className]="getClassName(e)">
         <td>{{e.id}}</td>
         <td>{{e.name}}</td>
         <td>{{e.password}}</td>

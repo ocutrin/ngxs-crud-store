@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { Action, Actions, Selector, StateContext } from '@ngxs/store';
 import { catchError, tap } from 'rxjs/operators';
 import { ActionFactory, StoreActionFactory } from './store-action.factory';
@@ -23,8 +22,9 @@ export const initialState = {
 };
 
 export interface StoreStateSelectors {
-  ids: (state: StateModel) => any;
-  entities: (state: StateModel) => any;
+  ids: (state: StateModel) => any[];
+  entities: (state: StateModel) => any[];
+  selectEntities: (state: StateModel) => any[];
   error: (state: StateModel) => any;
 }
 
@@ -36,22 +36,23 @@ export class StoreState {
     return {
       ids: (state: StateModel) => StoreState.ids(state, storeKey),
       entities: (state: StateModel) => StoreState.entities(state, storeKey),
+      selectEntities: (state: StateModel) => StoreState.entities(state, storeKey),
       error: (state: StateModel) => StoreState.error(state, storeKey)
     };
   }
 
   @Selector()
-  private static ids(state: StateModel, storeKey: string): Type<any> {
+  private static ids(state: StateModel, storeKey: string): any[] {
     return state[storeKey].ids;
   }
 
   @Selector()
-  private static entities(state: StateModel, storeKey: string): Type<any> {
+  private static entities(state: StateModel, storeKey: string): any[] {
     return state[storeKey].entities;
   }
 
   @Selector()
-  private static error(state: StateModel, storeKey: string): Type<any> {
+  private static error(state: StateModel, storeKey: string): any {
     return state[storeKey].error;
   }
 
