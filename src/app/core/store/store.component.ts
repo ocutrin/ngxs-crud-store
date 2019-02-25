@@ -26,6 +26,12 @@ export abstract class StoreComponent implements OnInit {
     return this._selectEntities$;
   }
 
+  private _isSelectEntity$: Observable<any[]>;
+
+  get isSelectEtntity$() {
+    return this._isSelectEntity$;
+  }
+
   private _actions: StoreActionFactory;
 
   get actions() {

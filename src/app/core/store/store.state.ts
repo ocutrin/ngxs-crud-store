@@ -13,6 +13,7 @@ export const initialState = {
   ids: [],
   entities: [],
   selectedEntities: [],
+  isSelectEntity: false,
   form: {
     model: undefined,
     dirty: false,
@@ -25,21 +26,13 @@ export interface StoreStateSelectors {
   ids: (state: StateModel) => any[];
   entities: (state: StateModel) => any[];
   selectEntities: (state: StateModel) => any[];
+  isSelectEntity: (state: StateModel) => boolean;
   error: (state: StateModel) => any;
 }
 
 export const key = 'store';
 
 export class StoreState {
-
-  static selectors(storeKey: string): StoreStateSelectors {
-    return {
-      ids: (state: StateModel) => StoreState.ids(state, storeKey),
-      entities: (state: StateModel) => StoreState.entities(state, storeKey),
-      selectEntities: (state: StateModel) => StoreState.entities(state, storeKey),
-      error: (state: StateModel) => StoreState.error(state, storeKey)
-    };
-  }
 
   @Selector()
   private static ids(state: StateModel, storeKey: string): any[] {
@@ -52,8 +45,28 @@ export class StoreState {
   }
 
   @Selector()
+  private static selectEntities(state: StateModel, storeKey: string): any[] {
+    return state[storeKey].selectEntities;
+  }
+
+  @Selector()
+  private static isSelectEntity(state: StateModel, storeKey: string): boolean {
+    return state[storeKey].isSelectEntity;
+  }
+
+  @Selector()
   private static error(state: StateModel, storeKey: string): any {
     return state[storeKey].error;
+  }
+
+  static selectors(storeKey: string): StoreStateSelectors {
+    return {
+      ids: (state: StateModel) => StoreState.ids(state, storeKey),
+      entities: (state: StateModel) => StoreState.entities(state, storeKey),
+      selectEntities: (state: StateModel) => StoreState.selectEntities(state, storeKey),
+      isSelectEntity: (state: StateModel) => StoreState.isSelectEntity(state, storeKey),
+      error: (state: StateModel) => StoreState.error(state, storeKey)
+    };
   }
 
   constructor(public servicio: StoreService, public actions$: Actions) { }
