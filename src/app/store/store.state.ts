@@ -93,19 +93,19 @@ export class StoreState {
     });
   }
 
-  // @Action(new StoreActionCrudFactory(crudStateName).update(null as any))
-  // update(context: StateContext<any>, accion: ActionCrud) {
-  //   const state = context.getState();
-  //   return this.servicio.update(accion.payload).pipe(
-  //     tap(() => {
-  //       context.patchState({
-  //         ...state
-  //       });
-  //     }), catchError(res => {
+  @Action(new StoreActionFactory(key).update(null as any))
+  update(context: StateContext<any>, accion: ActionFactory) {
+    //   const state = context.getState();
+    //   return this.servicio.update(accion.payload).pipe(
+    //     tap(() => {
+    //       context.patchState({
+    //         ...state
+    //       });
+    //     }), catchError(res => {
 
-  //       return res;
-  //     }));
-  // }
+    //       return res;
+    //     }));
+  }
 
   @Action(new StoreActionFactory(key).delete(null as any))
   delete(context: StateContext<any>, action: ActionFactory) {
