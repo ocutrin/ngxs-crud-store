@@ -78,6 +78,7 @@ export abstract class StoreComponent<T extends StoreEntity> implements OnInit {
   add() {
     if (this.form.valid) {
       this.store.dispatch(this.actions.create(this.form.value));
+      this.form.reset();
     }
   }
 

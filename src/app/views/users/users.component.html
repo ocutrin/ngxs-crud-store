@@ -1,20 +1,22 @@
-<!-- <form [formGroup]="form" class="form" ngxsForm="users.form">
-  <div class="form-control">
-    <input type="text" name="name" formControlName="name" placeholder="name">
-  </div>
-  <div class="form-control">
-    <input type="text" name="password" formControlName="password" placeholder="password">
-  </div>
-  <div class="form-control">
-    <label>Active</label>
-    <input type="checkbox" name="active" formControlName="active">
-  </div>
-  <div class="form-control bar">
-    <button type="button" class="btn btn-add" (click)="add()">Add</button>
-  </div>
-</form> -->
-
 <div class="center">
+
+  <form *ngIf="isAdd" [formGroup]="form" class="form" ngxsForm="users.form">
+    <div class="form-control">
+      <input type="text" name="name" formControlName="name" placeholder="name">
+    </div>
+    <div class="form-control">
+      <input type="text" name="password" formControlName="password" placeholder="password">
+    </div>
+    <div class="form-control">
+      <label>Active</label>
+      <input type="checkbox" name="active" formControlName="active">
+    </div>
+    <div class="btn-bar-control">
+      <button type="button" class="btn-add" (click)="add()">Add</button>
+      <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+
   <table>
     <thead>
       <tr>
@@ -39,6 +41,7 @@
 <div class="button-bar">
   <button (click)="edit()" *ngIf="isSelectEtntity$ | async">Edit</button>
   <button (click)="delete()" *ngIf="isSelectEtntity$ | async">Del</button>
+  <button (click)="add()" *ngIf="!(isSelectEtntity$ | async) && !isAdd">Add</button>
   <button (click)="clear()">Clear Store</button>
   <button (click)="search()">Search</button>
 </div>

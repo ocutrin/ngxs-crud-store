@@ -19,7 +19,7 @@ table tr:nth-child(odd) {
 }
 
 table th {
-  color: white;
+  color: #000;
   background-color: #f4d136;
 }
 
@@ -27,22 +27,34 @@ th,
 td {
   border-radius: 4px;
   padding: 10px;
-  // width: calc(100vw/4);
 }
 
 th {
   text-align: left;
 }
 
-.btn.btn-delete {
+.btn-bar-control {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-add:hover {
+  background-color: #4CAF50;
+  color: #000;
+  font-weight: bold;
+}
+
+.btn-cancel:hover {
+  background-color: #af4c4c;
+  color: #000;
+  font-weight: bold;
+}
+
+.btn-delete {
   background-color: #f44336;
 }
 
-.btn.btn-add {
-  background-color: #4CAF50;
-}
-
-.btn.btn-edit {
+.btn-edit {
   background-color: #f4d136;
 }
 
@@ -50,20 +62,15 @@ th {
   background-color: deepskyblue !important;
 }
 
+.form {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  padding: 0 0 20px 0;
+  justify-content: space-around;
+}
 
-// .form {
-//   display: flex;
-//   flex-direction: row;
-//   flex-flow: row wrap;
-//   padding: 10px;
-//   justify-content: space-around;
-// }
-
-// .form label {
-//   padding: 10px;
-//   color: #fff;
-// }
-
-// .bar {
-//   border: 2px solid #fff;
-// }
+.form label {
+  padding: 10px;
+  color: #fff;
+}
