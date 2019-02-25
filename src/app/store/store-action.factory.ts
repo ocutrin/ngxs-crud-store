@@ -1,3 +1,16 @@
+export interface ActionFactory {
+  readonly type: string;
+  payload?: any;
+}
+
+export const createAction = function (tag: string, action: string, _payload?: any) {
+  class DinamicAction {
+    readonly type: string = `[${tag.toUpperCase()}] ${action.toUpperCase()}`;
+    constructor(public payload = _payload) { }
+  }
+  return new DinamicAction();
+};
+
 export class StoreActionFactory {
 
   constructor(private tag: string) { }
@@ -14,7 +27,7 @@ export class StoreActionFactory {
     return createAction(this.tag, `UPDATE`, entity);
   }
 
-  delete(id: string): ActionFactory {
+  delete(id: string | string[]): ActionFactory {
     return createAction(this.tag, `DELETE`, id);
   }
 
@@ -32,15 +45,3 @@ export class StoreActionFactory {
 
 }
 
-export interface ActionFactory {
-  readonly type: string;
-  payload?: any;
-}
-
-export const createAction = function (tag: string, action: string, _payload?: any) {
-  class DinamicAction {
-    readonly type: string = `[${tag.toUpperCase()}] ${action.toUpperCase()}`;
-    constructor(public payload = _payload) { }
-  }
-  return new DinamicAction();
-};

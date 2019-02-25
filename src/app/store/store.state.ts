@@ -108,14 +108,15 @@ export class StoreState {
   @Action(new StoreActionFactory(key).delete(null as any))
   delete(context: StateContext<any>, action: ActionFactory) {
     const state = context.getState();
-    return this.servicio.delete(action.payload).pipe(
+    const payload: string = action.payload instanceof Array ? action.payload[0] : action.payload;
+    return this.servicio.delete(payload).pipe(
       tap(() => {
         context.patchState({
-          ids: state.ids.filter(i => i.id !== action.payload.id),
-          entities: state.entities.filter(i => i.id !== action.payload.entities),
+          ids: state.ids.filter((i: string) => i !== payload),
+          entities: state.entities.filter((e: any) => e.id !== payload),
+          selectedEntities: []
         });
       }), catchError(res => {
-
         return res;
       }));
   }

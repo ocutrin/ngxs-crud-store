@@ -20,6 +20,7 @@
     </div>
     <div class="form-control">
       <button type="button" class="btn btn-delete" (click)="delete()">Del</button>
+      <button type="button" class="btn btn-edit" (click)="edit()">Edit</button>
       <button type="button" class="btn btn-add" (click)="add()">Add</button>
     </div>
   </form>
@@ -39,7 +40,7 @@
 <div class="center">
   <table>
     <tbody>
-      <tr *ngFor="let e of entities$ | async" (click)="selectRow(e)" [ngStyle]="isSelectRow(e)">
+      <tr *ngFor="let e of entities$ | async" (click)="selectRow(e)" [className]="isSelectRow(e)">
         <td>{{e.id}}</td>
         <td>{{e.name}}</td>
         <td>{{e.password}}</td>

@@ -43,47 +43,29 @@ export class UsersComponent extends StoreComponent {
 
   add() {
     if (this.form.valid) {
-      console.log(this.form.value);
+      this.store.dispatch(this.actions.create({
+        id: -1,
+        ...this.form.value
+      }));
     }
   }
 
-  delete() {
+  edit() {
+  }
 
+  delete() {
+    this.store.dispatch(this.actions.delete(this.store.selectSnapshot(state => state.users.selectedEntities).map((e: any) => e.id)));
   }
 
   selectRow(entity: any) {
-    // const selectEntity = this.selectEntity && this.selectEntity.id === entity.id ? undefined : entity;
-
-
     this.store.dispatch(this.actions.selectedEntity(entity));
-
-
     // this.store.dispatch(new UpdateFormValue(
     // { value: this.selectEntity ? this.selectEntity : { name: '', password: '', active: true }, path: 'users.form' }));
   }
 
-  isSelectRow(e: any) {
-    const select: any[] = this.store.selectSnapshot(state => state.users.selectedEntities);
-    // // const unselect = !(this.selectEntity && this.form.value.name === this.selectEntity.name);
-
-    const s = select.filter(r => r.id !== e.id);
-
-    // console.log(s);
-
-    // // if (!(select && !unselect)) {
-    // // this.selectEntity = undefined;
-    // // this.store.dispatch(this.actions.selectedEntity(this.selectEntity));
-    // // }
-
-    return {
-      'background-color': s[0] && s[0].id === e.id ? '#f3d008' : '',
-      'color': s[0] && s[0].id === e.id ? '#fff' : ''
-    };
-
-    // return {
-    //   'background-color': '',
-    //   'color': ''
-    // };
+  isSelectRow(entity: any) {
+    return this.store.selectSnapshot(state => state.users.selectedEntities)
+      .filter((r: any) => r.id === entity.id).length > 0 ? 'selected' : '';
   }
 
 

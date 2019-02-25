@@ -72,7 +72,7 @@
 .center {
   height: 100vh;
   overflow-x: auto;
-  margin-top: 110px;
+  margin-top: 169px;
 }
 
 table {
@@ -118,5 +118,12 @@ th {
 
 .btn.btn-add {
   background-color: #4CAF50;
+}
 
+.btn.btn-edit {
+  background-color: #f4d136;
+}
+
+.selected {
+  background-color: #ff7f50 !important;
 }
