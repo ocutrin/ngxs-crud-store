@@ -1,3 +1,5 @@
+import { StoreEntity } from './store-entity';
+
 export interface ActionFactory {
   readonly type: string;
   payload?: any;
@@ -11,7 +13,7 @@ export const createAction = function (tag: string, action: string, _payload?: an
   return new DinamicAction();
 };
 
-export class StoreActionFactory {
+export class StoreActionFactory<T extends StoreEntity>  {
 
   constructor(private tag: string) { }
 
@@ -19,11 +21,11 @@ export class StoreActionFactory {
     return createAction(this.tag, `SEARCH`);
   }
 
-  create(entity: any): ActionFactory {
+  create(entity: T): ActionFactory {
     return createAction(this.tag, `CREATE`, entity);
   }
 
-  update(entity: any): ActionFactory {
+  update(entity: T): ActionFactory {
     return createAction(this.tag, `UPDATE`, entity);
   }
 
@@ -31,7 +33,7 @@ export class StoreActionFactory {
     return createAction(this.tag, `DELETE`, id);
   }
 
-  error(error: any): ActionFactory {
+  error(error: T): ActionFactory {
     return createAction(this.tag, `ERROR`, error);
   }
 
@@ -39,7 +41,7 @@ export class StoreActionFactory {
     return createAction(this.tag, `CLEAR STORE`);
   }
 
-  selectedEntity(entity: any): ActionFactory {
+  selectedEntity(entity: T): ActionFactory {
     return createAction(this.tag, `SELECTED ENTITY`, entity);
   }
 

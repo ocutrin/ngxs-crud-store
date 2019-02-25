@@ -5,22 +5,23 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StoreActionFactory } from './store-action.factory';
 import { StoreState, StoreStateSelectors } from './store.state';
+import { StoreEntity } from './store-entity';
 
-export abstract class StoreComponent implements OnInit {
+export abstract class StoreComponent<T extends StoreEntity> implements OnInit {
 
-  private _ids$: Observable<any[]>;
+  private _ids$: Observable<string[]>;
 
   get ids$() {
     return this._ids$;
   }
 
-  private _entities$: Observable<any[]>;
+  private _entities$: Observable<T[]>;
 
   get entities$() {
     return this._entities$;
   }
 
-  private _selectEntities$: Observable<any[]>;
+  private _selectEntities$: Observable<T[]>;
 
   get selectEntities$() {
     return this._selectEntities$;
@@ -32,7 +33,7 @@ export abstract class StoreComponent implements OnInit {
     return this._isSelectEntity$;
   }
 
-  private _actions: StoreActionFactory;
+  private _actions: StoreActionFactory<T>;
 
   get actions() {
     return this._actions;
