@@ -37,8 +37,8 @@
 </div>
 
 <div class="button-bar">
+  <button (click)="edit()" *ngIf="isSelectEtntity$ | async">Edit</button>
+  <button (click)="delete()" *ngIf="isSelectEtntity$ | async">Del</button>
   <button (click)="clear()">Clear Store</button>
-  <button (click)="edit()">Edit</button>
-  <button (click)="delete()">Del</button>
   <button (click)="search()">Search</button>
 </div>

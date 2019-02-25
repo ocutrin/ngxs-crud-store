@@ -26,7 +26,7 @@ export abstract class StoreComponent implements OnInit {
     return this._selectEntities$;
   }
 
-  private _isSelectEntity$: Observable<any[]>;
+  private _isSelectEntity$: Observable<boolean>;
 
   get isSelectEtntity$() {
     return this._isSelectEntity$;
@@ -57,6 +57,7 @@ export abstract class StoreComponent implements OnInit {
     this._ids$ = this.store.select(this.selectors.ids);
     this._entities$ = this.store.select(this.selectors.entities);
     this._selectEntities$ = this.store.select(this.selectors.selectEntities);
+    this._isSelectEntity$ = this.store.select(this.selectors.isSelectEntity);
   }
 
   abstract initForm(): FormGroup;

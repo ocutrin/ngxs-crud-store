@@ -103,7 +103,8 @@ export class StoreState {
     const unselect = unselectEntities.length === 0;
     return context.patchState({
       ...state,
-      selectedEntities: action.payload && unselect ? [action.payload] : []
+      selectedEntities: action.payload && unselect ? [action.payload] : [],
+      isSelectEntity: action.payload && unselect ? true : false
     });
   }
 
