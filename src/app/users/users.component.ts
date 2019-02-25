@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UpdateFormValue } from '@ngxs/form-plugin';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StoreComponent } from '../store/store.component';
@@ -32,35 +33,26 @@ export class UsersComponent extends StoreComponent {
     });
   }
 
-  randomUser(): void {
-    this.store.dispatch(this.actions.create({
-      id: -1,
-      name: Math.random().toString(36).substring(2),
-      password: Math.random().toString(36).substring(7),
-      active: Math.random() >= 0.5
-    }));
-  }
-
   add() {
     if (this.form.valid) {
-      this.store.dispatch(this.actions.create({
-        id: -1,
-        ...this.form.value
-      }));
+      this.store.dispatch(this.actions.create(this.form.value));
     }
   }
 
   edit() {
+    this.store.dispatch(new UpdateFormValue({
+      value: this.store.selectSnapshot(state => state.users.selectedEntities)[0], path: 'users.form'
+    }));
   }
 
   delete() {
-    this.store.dispatch(this.actions.delete(this.store.selectSnapshot(state => state.users.selectedEntities).map((e: any) => e.id)));
+    this.store.dispatch(this.actions.delete(
+      this.store.selectSnapshot(state => state.users.selectedEntities).map((e: any) => e.id)));
   }
 
   selectRow(entity: any) {
     this.store.dispatch(this.actions.selectedEntity(entity));
-    // this.store.dispatch(new UpdateFormValue(
-    // { value: this.selectEntity ? this.selectEntity : { name: '', password: '', active: true }, path: 'users.form' }));
+
   }
 
   isSelectRow(entity: any) {
