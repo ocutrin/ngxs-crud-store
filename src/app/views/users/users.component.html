@@ -27,8 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="
-      let e of entities$ | async" (click)="selectRow(e)" [className]="getClassName(e)">
+      <tr *ngFor="let e of entities$ | async" (click)="selectRow(e)" [className]="getClassName(e)">
         <td>{{e.id}}</td>
         <td>{{e.name}}</td>
         <td>{{e.password}}</td>
@@ -38,10 +37,10 @@
   </table>
 </div>
 
-<div class="button-bar">
-  <button (click)="edit()" *ngIf="isSelectEtntity$ | async">Edit</button>
-  <button (click)="delete()" *ngIf="isSelectEtntity$ | async">Del</button>
-  <button (click)="add()" *ngIf="!(isSelectEtntity$ | async) && !isAdd">Add</button>
-  <button (click)="clear()">Clear Store</button>
-  <button (click)="search()">Search</button>
-</div>
+<ul class="button-bar">
+  <li><a (click)="search()">Search</a></li>
+  <li><a (click)="clear()" *ngIf="(entities$ | async).length > 0">Clear Store</a></li>
+  <li><a (click)="add()" class="btn-add" *ngIf="!(isSelectEtntity$ | async) && !isAdd">Add</a></li>
+  <li><a (click)="edit()" class="btn-edit" *ngIf="isSelectEtntity$ | async">Edit</a></li>
+  <li><a (click)="delete()" class="btn-delete" *ngIf="isSelectEtntity$ | async">Del</a></li>
+</ul>

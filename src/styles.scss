@@ -5,6 +5,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: #222;
+  font-family: Arial !important;
+  font-size: 1em !important;
 }
 
 ::-webkit-scrollbar {
@@ -29,12 +31,6 @@ input[type=checkbox] {
   margin: 10px;
 }
 
-button {
-  text-decoration: none;
-  border: none;
-  text-align: center;
-}
-
 .center {
   overflow: auto;
   padding: 20px;
@@ -42,31 +38,40 @@ button {
   height: calc(100vh - 160px);
 }
 
-.button-bar {
+ul.button-bar {
+  list-style-type: none;
   background-color: #333;
-  display: flex;
-  flex-direction: row;
-  flex-flow: row wrap;
-  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   height: 58px;
   border-top: 2px solid #000;
 }
 
+.button-bar li {
+  float: right;
+}
+
+.button-bar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 21px 18px;
+  text-decoration: none;
+}
 
 button {
-  color: #fff;
-  display: block;
-  background-color: #333;
-  text-align: center;
-  width: 120px;
   text-decoration: none;
-  cursor: pointer;
+  border: none;
+  text-align: center;
+  color: #fff;
+  background-color: #333;
+  width: 120px;
 }
 
 .button-bar button:hover {
   background-color: #4CAF50;
   color: #000;
-  font-weight: bold;
 }
 
 ul.navbar {
@@ -91,15 +96,18 @@ ul.navbar {
   text-decoration: none;
 }
 
+.button-bar li a:hover {
+  background-color: deepskyblue;
+  color: #000;
+}
+
 .navbar li a:hover:not(.title) {
   background-color: deepskyblue;
   color: #000;
-  font-weight: bold;
 }
 
 .navbar .title {
   background-color: #111;
   padding: 21px 30px 21px 30px !important;
   color: deepskyblue !important;
-  font-weight: bold;
 }
