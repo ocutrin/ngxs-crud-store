@@ -10,8 +10,6 @@ table tr:nth-child(even) {
 table {
   width: 100%;
   padding: 2px;
-  border: 2px solid #000;
-  border-radius: 4px !important;
 }
 
 table tr:nth-child(odd) {
@@ -39,6 +37,11 @@ th {
 }
 
 .btn-add:hover {
+  background-color: #4CAF50;
+  color: #000;
+}
+
+.btn-save:hover {
   background-color: #4CAF50;
   color: #000;
 }

@@ -28,13 +28,20 @@ export class UsersComponent extends StoreComponent<User> {
     });
   }
 
-  add() {
-    if (!this.isAdd) {
-      this.isAdd = true;
-    } else {
-      super.add();
-    }
+
+  save() {
+    super.add();
   }
+
+  add() {
+    this.isAdd = true;
+  }
+
+  edit() {
+    this.isAdd = true;
+    super.edit();
+  }
+
 
   cancel() {
     this.store.dispatch(new UpdateFormValue({ value: { name: '', password: '', active: true }, path: 'users.form' }));
