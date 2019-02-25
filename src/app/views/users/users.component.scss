@@ -3,19 +3,19 @@
   flex-direction: column;
   overflow: hidden;
   background-color: #333;
-  position: fixed;
   vertical-align: middle;
-  top: 0;
   width: 100%;
 }
 
-.nav {
+.button-bar {
   display: flex;
   flex-direction: row;
   flex-flow: row wrap;
+  background-color: #333;
+  justify-content: flex-end;
 }
 
-.nav a {
+.button-bar a {
   display: block;
   color: white;
   text-align: center;
@@ -24,7 +24,7 @@
   cursor: pointer;
 }
 
-.nav a:hover:not(.title):not(.title) {
+.button-bar a:hover:not(.title):not(.title) {
   background-color: #4CAF50;
 }
 
@@ -73,9 +73,9 @@
 }
 
 .center {
-  height: 100vh;
+  height: calc(100vh - 194px);
   overflow-x: auto;
-  margin-top: 203px;
+  margin-bottom: 1px;
 }
 
 table {
@@ -131,6 +131,6 @@ th {
   background-color: #ff7f50 !important;
 }
 
-.bar{
+.bar {
   border: 2px solid #fff;
 }

@@ -1,10 +1,10 @@
-<div class="top">
 
-  <div class="nav">
-    <a class="title">{{title}}</a>
-    <a (click)="search()">Search</a>
-    <a (click)="clear()">Clear</a>
-  </div>
+
+<!-- <a class="title">{{title}}</a> -->
+<!-- <a (click)="clear()">Clear</a> -->
+
+
+<div class="top">
 
   <form [formGroup]="form" class="form" ngxsForm="users.form">
     <div class="form-control">
@@ -18,8 +18,6 @@
       <input type="checkbox" name="active" formControlName="active">
     </div>
     <div class="form-control bar">
-      <button type="button" class="btn btn-delete" (click)="delete()">Del</button>
-      <button type="button" class="btn btn-edit" (click)="edit()">Edit</button>
       <button type="button" class="btn btn-add" (click)="add()">Add</button>
     </div>
   </form>
@@ -47,4 +45,10 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<div class="button-bar">
+  <a (click)="edit()">Edit</a>
+  <a (click)="delete()">Del</a>
+  <a (click)="search()">Search</a>
 </div>
