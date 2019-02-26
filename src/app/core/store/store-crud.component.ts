@@ -2,11 +2,11 @@ import { OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { StoreActionFactory } from './store-action.factory';
-import { StoreEntity } from './store-entity.model';
-import { StoreState, StoreStateSelectors } from './store.state';
+import { StoreCrudActionFactory } from './store-crud-action.factory';
+import { StoreCrudEntity } from './store-crud-entity.model';
+import { StoreCrudState, StoreCrudStateSelectors } from './store-crud.state';
 
-export abstract class StoreComponent<T extends StoreEntity> implements OnInit {
+export abstract class StoreCrudComponent<T extends StoreCrudEntity> implements OnInit {
 
     private _ids$: Observable<string[]>;
 
@@ -38,13 +38,13 @@ export abstract class StoreComponent<T extends StoreEntity> implements OnInit {
         return this._error$;
     }
 
-    private _actions: StoreActionFactory<T>;
+    private _actions: StoreCrudActionFactory<T>;
 
     get actions() {
         return this._actions;
     }
 
-    private _selectors: StoreStateSelectors;
+    private _selectors: StoreCrudStateSelectors;
 
     get selectors() {
         return this._selectors;
@@ -57,8 +57,8 @@ export abstract class StoreComponent<T extends StoreEntity> implements OnInit {
     }
 
     constructor(private key, public store: Store, public formBuilder: FormBuilder) {
-        this._actions = new StoreActionFactory(this.key);
-        this._selectors = StoreState.selectors(this.key);
+        this._actions = new StoreCrudActionFactory(this.key);
+        this._selectors = StoreCrudState.selectors(this.key);
         this._form = this.formBuilder.group(this.initForm());
         this._ids$ = this.store.select(this.selectors.ids);
         this._entities$ = this.store.select(this.selectors.entities);

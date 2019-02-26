@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UpdateFormValue } from '@ngxs/form-plugin';
 import { Store } from '@ngxs/store';
-import { StoreComponent } from '../../core/store/store.component';
+import { StoreCrudComponent } from '../../core/store/store-crud.component';
 import { User } from './model/user.model';
 
 @Component({
@@ -10,7 +10,7 @@ import { User } from './model/user.model';
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss']
 })
-export class UsersComponent extends StoreComponent<User> {
+export class UsersComponent extends StoreCrudComponent<User> {
 
     static key = 'users';
 
@@ -55,6 +55,10 @@ export class UsersComponent extends StoreComponent<User> {
         this.isEdit = true;
     }
 
+    delete() {
+        this.isEdit = this.isAdd = false;
+        super.delete();
+    }
 
     cancel() {
         this.store.dispatch(new UpdateFormValue({ value: { name: '', password: '', active: true }, path: 'users.form' }));

@@ -1,13 +1,13 @@
 import { Actions, State } from '@ngxs/store';
-import { StoreStateModel } from 'src/app/core/store/store-state.model';
-import { initialState, StoreState } from '../../core/store/store.state';
+import { initialState, StoreCrudStateModel } from 'src/app/core/store/store-crud-state.model';
+import { StoreCrudState } from '../../core/store/store-crud.state';
 import { UsersService } from './users.service';
 
-@State<StoreStateModel>({
+@State<StoreCrudStateModel>({
     name: 'users',
     defaults: initialState
 })
-export class UsersState extends StoreState {
+export class UsersState extends StoreCrudState {
     constructor(public storeService: UsersService, public actions$: Actions) {
         super(storeService, actions$);
     }

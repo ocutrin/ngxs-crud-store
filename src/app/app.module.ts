@@ -9,7 +9,7 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from '../environments/environment.prod';
 import { AppRoutingRoutingModule } from './app-routing-routing.module';
 import { AppComponent } from './app.component';
-import { StorePluginModule } from './core/store/store-plugin.module';
+import { StoreCrudPluginModule } from './core/store/store-crud-plugin.module';
 import { HomeComponent } from './views/home/home.component';
 import { UsersComponent } from './views/users/users.component';
 
@@ -27,7 +27,7 @@ import { UsersComponent } from './views/users/users.component';
     NgxsFormPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
     NgxsModule.forRoot([], { developmentMode: environment.production }),
-    StorePluginModule.forRoot(UsersComponent.key),
+    StoreCrudPluginModule.forRoot(UsersComponent.key),
     AppRoutingRoutingModule
   ],
   bootstrap: [AppComponent]

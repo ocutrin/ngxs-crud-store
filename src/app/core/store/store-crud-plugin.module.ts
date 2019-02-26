@@ -1,17 +1,17 @@
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { NgModule } from '@angular/core';
 import { NGXS_PLUGINS } from '@ngxs/store';
-import { createStorePlugin } from './store.plugin';
+import { createStoreCrudPlugin } from './store-crud.plugin';
 
 @NgModule()
-export class StorePluginModule {
+export class StoreCrudPluginModule {
   static forRoot(storeKey: string): ModuleWithProviders {
     return {
-      ngModule: StorePluginModule,
+      ngModule: StoreCrudPluginModule,
       providers: [
         {
           provide: NGXS_PLUGINS,
-          useValue: createStorePlugin(storeKey),
+          useValue: createStoreCrudPlugin(storeKey),
           multi: true
         }
       ]

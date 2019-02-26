@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StoreEntity } from './store-entity.model';
+import { StoreCrudEntity } from './store-crud-entity.model';
 
 
 @Injectable()
-export class StoreService<T extends StoreEntity> {
+export class StoreCrudService<T extends StoreCrudEntity> {
 
   private _url = `${this.host}/${this.url}`;
 

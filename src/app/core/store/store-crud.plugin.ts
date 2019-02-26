@@ -1,16 +1,16 @@
-import { ActionFactory, StoreActionFactory } from './store-action.factory';
-import { key, StoreState } from './store.state';
+import { ActionFactory, StoreCrudActionFactory } from './store-crud-action.factory';
+import { key, StoreCrudState } from './store-crud.state';
 
-export function createStorePlugin(...storeKeys: string[]) {
+export function createStoreCrudPlugin(...storeKeys: string[]) {
 
-    return function (state: StoreState, action: ActionFactory, next: any) {
+    return function (state: StoreCrudState, action: ActionFactory, next: any) {
 
         for (const storeKey of storeKeys) {
 
             if (storeKey) {
 
-                const generciAction = new StoreActionFactory(storeKey);
-                const actionsStore = new StoreActionFactory(key);
+                const generciAction = new StoreCrudActionFactory(storeKey);
+                const actionsStore = new StoreCrudActionFactory(key);
 
                 if (action.type === generciAction.search().type) {
                     return next(state, actionsStore.search());

@@ -1,4 +1,4 @@
-import { StoreEntity } from './store-entity.model';
+import { StoreCrudEntity } from './store-crud-entity.model';
 
 export interface ActionFactory {
   readonly type: string;
@@ -13,7 +13,7 @@ export const createAction = function (tag: string, action: string, _payload?: an
   return new DinamicAction();
 };
 
-export class StoreActionFactory<T extends StoreEntity>  {
+export class StoreCrudActionFactory<T extends StoreCrudEntity>  {
 
   constructor(private tag: string) { }
 
