@@ -9,7 +9,7 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from '../environments/environment.prod';
 import { AppRoutingRoutingModule } from './app-routing-routing.module';
 import { AppComponent } from './app.component';
-import { StoreCrudPluginModule } from './core/store/store-crud-plugin.module';
+import { StoreCrudPluginModule } from './core/store-crud/store-crud-plugin.module';
 import { HomeComponent } from './views/home/home.component';
 import { UsersComponent } from './views/users/users.component';
 

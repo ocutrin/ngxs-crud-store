@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UpdateFormValue } from '@ngxs/form-plugin';
 import { Store } from '@ngxs/store';
-import { StoreCrudComponent } from '../../core/store/store-crud.component';
+import { StoreCrudComponent } from '../../core/store-crud/store-crud.component';
 import { User } from './model/user.model';
 
 @Component({

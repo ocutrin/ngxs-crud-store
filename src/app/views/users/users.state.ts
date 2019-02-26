@@ -1,6 +1,6 @@
 import { Actions, State } from '@ngxs/store';
-import { initialState, StoreCrudStateModel } from 'src/app/core/store/store-crud-state.model';
-import { StoreCrudState } from '../../core/store/store-crud.state';
+import { initialState, StoreCrudStateModel } from 'src/app/core/store-crud/store-crud-state.model';
+import { StoreCrudState } from '../../core/store-crud/store-crud.state';
 import { UsersService } from './users.service';
 
 @State<StoreCrudStateModel>({
