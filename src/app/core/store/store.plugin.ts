@@ -5,7 +5,7 @@ export function createStorePlugin(...storeKeys: string[]) {
 
     return function (state, action, next) {
 
-        for (const storeKey in storeKeys) {
+        for (const storeKey of storeKeys) {
 
             if (storeKey) {
 
