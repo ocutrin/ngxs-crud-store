@@ -1,9 +1,9 @@
-import { StoreActionFactory } from './store-action.factory';
-import { key } from './store.state';
+import { ActionFactory, StoreActionFactory } from './store-action.factory';
+import { key, StoreState } from './store.state';
 
 export function createStorePlugin(...storeKeys: string[]) {
 
-    return function (state, action, next) {
+    return function (state: StoreState, action: ActionFactory, next: any) {
 
         for (const storeKey of storeKeys) {
 
