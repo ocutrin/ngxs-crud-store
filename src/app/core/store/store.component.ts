@@ -1,11 +1,10 @@
 import { OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UpdateFormValue } from '@ngxs/form-plugin';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StoreActionFactory } from './store-action.factory';
-import { StoreState, StoreStateSelectors } from './store.state';
 import { StoreEntity } from './store-entity';
+import { StoreState, StoreStateSelectors } from './store.state';
 
 export abstract class StoreComponent<T extends StoreEntity> implements OnInit {
 
@@ -83,14 +82,16 @@ export abstract class StoreComponent<T extends StoreEntity> implements OnInit {
   }
 
   edit() {
-    this.store.dispatch(new UpdateFormValue({
-      value: this.store.selectSnapshot(state => state.users.selectedEntities)[0], path: 'users.form'
-    }));
+    if (this.form.valid) {
+      const e = this.store.selectSnapshot(this.selectors.selectSelectedEntities)[0];
+      this.store.dispatch(this.actions.update({ id: e.id, ...this.form.value }));
+      this.form.reset();
+    }
   }
 
   delete() {
     this.store.dispatch(this.actions.delete(
-      this.store.selectSnapshot(state => state.users.selectedEntities).map((e: any) => e.id)));
+      this.store.selectSnapshot(this.selectors.selectSelectedEntities).map((e: any) => e.id)[0]));
   }
 
   selectRow(entity: any) {

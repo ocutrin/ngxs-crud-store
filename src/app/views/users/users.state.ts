@@ -7,8 +7,8 @@ import { UsersService } from './users.service';
   defaults: initialState
 })
 export class UsersState extends StoreState {
-  constructor(public servicio: UsersService, public actions$: Actions) {
-    super(servicio, actions$);
+  constructor(public storeService: UsersService, public actions$: Actions) {
+    super(storeService, actions$);
   }
 
 }

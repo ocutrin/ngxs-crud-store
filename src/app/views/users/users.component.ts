@@ -18,6 +18,8 @@ export class UsersComponent extends StoreComponent<User> {
 
   isAdd = false;
 
+  isEdit = false;
+
   constructor(public store: Store, public formBuilder: FormBuilder) {
     super(UsersComponent.key, store, formBuilder);
   }
@@ -28,9 +30,12 @@ export class UsersComponent extends StoreComponent<User> {
     });
   }
 
-
   save() {
-    super.add();
+    if (this.isAdd) {
+      super.add();
+    } else if (this.isEdit) {
+      super.edit();
+    }
   }
 
   add() {
@@ -38,8 +43,9 @@ export class UsersComponent extends StoreComponent<User> {
   }
 
   edit() {
-    this.isAdd = true;
-    super.edit();
+    this.store.dispatch(
+      new UpdateFormValue({ value: this.store.selectSnapshot(this.selectors.selectSelectedEntities)[0], path: 'users.form' }));
+    this.isEdit = true;
   }
 
 

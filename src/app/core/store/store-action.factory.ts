@@ -29,7 +29,7 @@ export class StoreActionFactory<T extends StoreEntity>  {
     return createAction(this.tag, `UPDATE`, entity);
   }
 
-  delete(id: string | string[]): ActionFactory {
+  delete(id: string): ActionFactory {
     return createAction(this.tag, `DELETE`, id);
   }
 

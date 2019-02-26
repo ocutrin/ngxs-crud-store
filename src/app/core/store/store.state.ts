@@ -1,6 +1,7 @@
 import { Action, Actions, Selector, StateContext } from '@ngxs/store';
 import { catchError, tap } from 'rxjs/operators';
 import { ActionFactory, StoreActionFactory } from './store-action.factory';
+import { StoreEntity } from './store-entity';
 import { StoreService } from './store.service';
 
 export interface StateModel {
@@ -26,6 +27,7 @@ export interface StoreStateSelectors {
   ids: (state: StateModel) => any[];
   entities: (state: StateModel) => any[];
   selectEntities: (state: StateModel) => any[];
+  selectSelectedEntities: (state: StateModel) => any[];
   isSelectEntity: (state: StateModel) => boolean;
   error: (state: StateModel) => any;
 }
@@ -35,27 +37,32 @@ export const key = 'store';
 export class StoreState {
 
   @Selector()
-  private static ids(state: StateModel, storeKey: string): any[] {
+  protected static ids(state: StateModel, storeKey: string): any[] {
     return state[storeKey].ids;
   }
 
   @Selector()
-  private static entities(state: StateModel, storeKey: string): any[] {
+  protected static entities(state: StateModel, storeKey: string): any[] {
     return state[storeKey].entities;
   }
 
   @Selector()
-  private static selectEntities(state: StateModel, storeKey: string): any[] {
+  protected static selectEntities(state: StateModel, storeKey: string): any[] {
     return state[storeKey].selectEntities;
   }
 
   @Selector()
-  private static isSelectEntity(state: StateModel, storeKey: string): boolean {
+  protected static selectSelectedEntities(state: StateModel, storeKey: string): any[] {
+    return state[storeKey].selectedEntities;
+  }
+
+  @Selector()
+  protected static isSelectEntity(state: StateModel, storeKey: string): boolean {
     return state[storeKey].isSelectEntity;
   }
 
   @Selector()
-  private static error(state: StateModel, storeKey: string): any {
+  protected static error(state: StateModel, storeKey: string): any {
     return state[storeKey].error;
   }
 
@@ -64,28 +71,31 @@ export class StoreState {
       ids: (state: StateModel) => StoreState.ids(state, storeKey),
       entities: (state: StateModel) => StoreState.entities(state, storeKey),
       selectEntities: (state: StateModel) => StoreState.selectEntities(state, storeKey),
+      selectSelectedEntities: (state: StateModel) => StoreState.selectSelectedEntities(state, storeKey),
       isSelectEntity: (state: StateModel) => StoreState.isSelectEntity(state, storeKey),
       error: (state: StateModel) => StoreState.error(state, storeKey)
     };
   }
 
-  constructor(public servicio: StoreService, public actions$: Actions) { }
+  constructor(public storeService: StoreService<StoreEntity>, public actions$: Actions) { }
 
   @Action(new StoreActionFactory(key).search())
   search(context: StateContext<any>) {
     const state = context.getState();
-    return this.servicio.search().pipe(
+    return this.storeService.search().pipe(
       tap((res: any[]) => context.setState({
         ...state,
         ids: res.map(r => r.id),
         entities: res,
-      })));
+      })), catchError(res => {
+        return res;
+      }));
   }
 
   @Action(new StoreActionFactory(key).create(null as any))
   create(context: StateContext<any>, action: ActionFactory) {
     const state = context.getState();
-    return this.servicio.create(action.payload).pipe(
+    return this.storeService.create(action.payload).pipe(
       tap((res: any) => {
         context.patchState({
           ids: [...state.ids, res.id],
@@ -109,24 +119,24 @@ export class StoreState {
   }
 
   @Action(new StoreActionFactory(key).update(null as any))
-  update(context: StateContext<any>, accion: ActionFactory) {
-    //   const state = context.getState();
-    //   return this.servicio.update(accion.payload).pipe(
-    //     tap(() => {
-    //       context.patchState({
-    //         ...state
-    //       });
-    //     }), catchError(res => {
-
-    //       return res;
-    //     }));
+  update(context: StateContext<any>, action: ActionFactory) {
+    const state = context.getState();
+    return this.storeService.update(action.payload).pipe(
+      tap((res: any) => {
+        context.patchState({
+          ids: [...state.ids, res.id],
+          entities: [...state.entities.filter(r => r.id !== res.id), res],
+        });
+      }), catchError(res => {
+        return res;
+      }));
   }
 
   @Action(new StoreActionFactory(key).delete(null as any))
   delete(context: StateContext<any>, action: ActionFactory) {
     const state = context.getState();
     const payload: string = action.payload instanceof Array ? action.payload[0] : action.payload;
-    return this.servicio.delete(payload).pipe(
+    return this.storeService.delete(payload).pipe(
       tap(() => {
         context.patchState({
           ids: state.ids.filter((i: string) => i !== payload),
