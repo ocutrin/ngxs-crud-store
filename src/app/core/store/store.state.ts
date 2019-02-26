@@ -1,7 +1,7 @@
 import { Action, Actions, Selector, StateContext } from '@ngxs/store';
 import { catchError, tap } from 'rxjs/operators';
 import { ActionFactory, StoreActionFactory } from './store-action.factory';
-import { StoreEntity } from './store-entity';
+import { StoreEntity } from './store-entity.model';
 import { StoreService } from './store.service';
 
 export interface StateModel {

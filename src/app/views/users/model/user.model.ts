@@ -1,4 +1,4 @@
-import { StoreEntity } from '../../../core/store/store-entity';
+import { StoreEntity } from '../../../core/store/store-entity.model';
 
 export class User implements StoreEntity {
   id: string;

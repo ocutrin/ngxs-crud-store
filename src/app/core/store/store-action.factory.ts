@@ -1,4 +1,4 @@
-import { StoreEntity } from './store-entity';
+import { StoreEntity } from './store-entity.model';
 
 export interface ActionFactory {
   readonly type: string;

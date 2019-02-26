@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StoreActionFactory } from './store-action.factory';
-import { StoreEntity } from './store-entity';
+import { StoreEntity } from './store-entity.model';
 import { StoreState, StoreStateSelectors } from './store.state';
 
 export abstract class StoreComponent<T extends StoreEntity> implements OnInit {
