@@ -6,7 +6,15 @@ import { StoreService } from './store.service';
 
 export interface StateModel {
   ids: string[];
-  entities: any[];
+  entities: StoreEntity[];
+  selectedEntities: StoreEntity[];
+  isSelectEntity: boolean;
+  form: {
+    model: StoreEntity,
+    dirty: boolean,
+    status: string,
+    errors: any
+  };
   error?: any;
 }
 
@@ -80,10 +88,10 @@ export class StoreState {
   constructor(public storeService: StoreService<StoreEntity>, public actions$: Actions) { }
 
   @Action(new StoreActionFactory(key).search())
-  search(context: StateContext<any>) {
+  search(context: StateContext<StateModel>) {
     const state = context.getState();
     return this.storeService.search().pipe(
-      tap((res: any[]) => context.setState({
+      tap((res: StoreEntity[]) => context.setState({
         ...state,
         ids: res.map(r => r.id),
         entities: res,
@@ -92,11 +100,11 @@ export class StoreState {
       }));
   }
 
-  @Action(new StoreActionFactory(key).create(null as any))
-  create(context: StateContext<any>, action: ActionFactory) {
+  @Action(new StoreActionFactory(key).create(null as StoreEntity))
+  create(context: StateContext<StateModel>, action: ActionFactory) {
     const state = context.getState();
     return this.storeService.create(action.payload).pipe(
-      tap((res: any) => {
+      tap((res: StoreEntity) => {
         context.patchState({
           ids: [...state.ids, res.id],
           entities: [...state.entities, res],
@@ -106,8 +114,8 @@ export class StoreState {
       }));
   }
 
-  @Action(new StoreActionFactory(key).selectedEntity(null as any))
-  selectedEntity(context: StateContext<any>, action: ActionFactory) {
+  @Action(new StoreActionFactory(key).selectedEntity(null as StoreEntity))
+  selectedEntity(context: StateContext<StateModel>, action: ActionFactory) {
     const state = context.getState();
     const unselectEntities = state.selectedEntities.filter(r => r.id === action.payload.id);
     const unselect = unselectEntities.length === 0;
@@ -118,11 +126,11 @@ export class StoreState {
     });
   }
 
-  @Action(new StoreActionFactory(key).update(null as any))
-  update(context: StateContext<any>, action: ActionFactory) {
+  @Action(new StoreActionFactory(key).update(null as StoreEntity))
+  update(context: StateContext<StateModel>, action: ActionFactory) {
     const state = context.getState();
     return this.storeService.update(action.payload).pipe(
-      tap((res: any) => {
+      tap((res: StoreEntity) => {
         context.patchState({
           ids: [...state.ids, res.id],
           entities: [...state.entities.filter(r => r.id !== res.id), res],
@@ -132,15 +140,15 @@ export class StoreState {
       }));
   }
 
-  @Action(new StoreActionFactory(key).delete(null as any))
-  delete(context: StateContext<any>, action: ActionFactory) {
+  @Action(new StoreActionFactory(key).delete(null as string))
+  delete(context: StateContext<StateModel>, action: ActionFactory) {
     const state = context.getState();
     const payload: string = action.payload instanceof Array ? action.payload[0] : action.payload;
     return this.storeService.delete(payload).pipe(
       tap(() => {
         context.patchState({
           ids: state.ids.filter((i: string) => i !== payload),
-          entities: state.entities.filter((e: any) => e.id !== payload),
+          entities: state.entities.filter((e: StoreEntity) => e.id !== payload),
           selectedEntities: []
         });
       }), catchError(res => {
