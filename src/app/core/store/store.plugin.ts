@@ -1,43 +1,47 @@
 import { StoreActionFactory } from './store-action.factory';
 import { key } from './store.state';
 
-export function createStorePlugin(storeKey: string) {
+export function createStorePlugin(...storeKeys: string[]) {
 
-  return function (state, action, next) {
+    return function (state, action, next) {
 
-    if (storeKey) {
+        for (const storeKey in storeKeys) {
 
-      const actionsUsers = new StoreActionFactory(storeKey);
-      const actionsStore = new StoreActionFactory(key);
+            if (storeKey) {
 
-      if (action.type === actionsUsers.search().type) {
-        return next(state, actionsStore.search());
-      }
+                const generciAction = new StoreActionFactory(storeKey);
+                const actionsStore = new StoreActionFactory(key);
 
-      if (action.type === actionsUsers.create(null).type) {
-        return next(state, actionsStore.create(action.payload));
-      }
+                if (action.type === generciAction.search().type) {
+                    return next(state, actionsStore.search());
+                }
 
-      if (action.type === actionsUsers.update(null).type) {
-        return next(state, actionsStore.update(action.payload));
-      }
+                if (action.type === generciAction.create(null).type) {
+                    return next(state, actionsStore.create(action.payload));
+                }
 
-      if (action.type === actionsUsers.delete(null).type) {
-        return next(state, actionsStore.delete(action.payload));
-      }
+                if (action.type === generciAction.update(null).type) {
+                    return next(state, actionsStore.update(action.payload));
+                }
 
-      if (action.type === actionsUsers.clearStore().type) {
-        return next(state, actionsStore.clearStore());
-      }
+                if (action.type === generciAction.delete(null).type) {
+                    return next(state, actionsStore.delete(action.payload));
+                }
 
-      if (action.type === actionsUsers.selectedEntity(null).type) {
-        return next(state, actionsStore.selectedEntity(action.payload));
-      }
+                if (action.type === generciAction.clearStore().type) {
+                    return next(state, actionsStore.clearStore());
+                }
 
-    }
+                if (action.type === generciAction.selectedEntity(null).type) {
+                    return next(state, actionsStore.selectedEntity(action.payload));
+                }
 
-    return next(state, action);
+            }
 
-  };
+        };
+
+        return next(state, action);
+
+    };
 
 }
