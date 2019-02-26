@@ -25,9 +25,11 @@ export class UsersComponent extends StoreComponent<User> {
   }
 
   initForm() {
-    return this.formBuilder.group({
-      name: ['', Validators.required], password: ['', Validators.required], active: [true, Validators.required]
-    });
+    return {
+      name: ['', Validators.required],
+      password: ['', Validators.required],
+      active: [true, Validators.required]
+    };
   }
 
   save() {

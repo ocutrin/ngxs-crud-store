@@ -53,14 +53,14 @@ export abstract class StoreComponent<T extends StoreEntity> implements OnInit {
   constructor(private key, public store: Store, public formBuilder: FormBuilder) {
     this._actions = new StoreActionFactory(this.key);
     this._selectors = StoreState.selectors(this.key);
-    this._form = this.initForm();
+    this._form = this.formBuilder.group(this.initForm());
     this._ids$ = this.store.select(this.selectors.ids);
     this._entities$ = this.store.select(this.selectors.entities);
     this._selectEntities$ = this.store.select(this.selectors.selectEntities);
     this._isSelectEntity$ = this.store.select(this.selectors.isSelectEntity);
   }
 
-  abstract initForm(): FormGroup;
+  abstract initForm(): any;
 
   ngOnInit() {
     this.search();
