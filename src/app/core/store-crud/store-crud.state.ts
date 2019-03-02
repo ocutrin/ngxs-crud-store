@@ -7,6 +7,7 @@ import { StoreCrudEntity } from './store-crud-entity.model';
 import { initialState, StoreCrudStateModel } from './store-crud-state.model';
 import { StoreCrudService } from './store-crud.service';
 
+
 export interface StoreCrudStateSelectors {
     ids: (state: StoreCrudStateModel) => any[];
     entities: (state: StoreCrudStateModel) => any[];
@@ -69,10 +70,9 @@ export class StoreCrudState {
 
     @Action(StoreCrudState.actions().search())
     search(context: StateContext<StoreCrudStateModel>) {
-        const state = context.getState();
         return this.storeService.search().pipe(
             tap((res: StoreCrudEntity[]) => context.setState({
-                ...state,
+                ...initialState,
                 ids: res.map(r => r.id),
                 entities: res,
             })), catchError((error) => this.error(context, error)));
@@ -84,6 +84,7 @@ export class StoreCrudState {
         return this.storeService.create(action.payload).pipe(
             tap((res: StoreCrudEntity) => {
                 context.patchState({
+                    ...initialState,
                     ids: [...state.ids, res.id],
                     entities: [...state.entities, res],
                 });

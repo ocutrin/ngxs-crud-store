@@ -37,6 +37,11 @@ export class UsersComponent extends StoreCrudComponent<User> {
         };
     }
 
+    selectRow(entity: any) {
+        super.selectRow(entity);
+        this.isAdd = false;
+    }
+
     save() {
         if (this.isAdd) {
             super.add();
@@ -47,12 +52,19 @@ export class UsersComponent extends StoreCrudComponent<User> {
 
     add() {
         this.isAdd = true;
+        this.isEdit = false;
+    }
+
+    clear() {
+        super.clear();
+        this.isAdd = false;
     }
 
     edit() {
+        this.isAdd = false;
+        this.isEdit = true;
         this.store.dispatch(
             new UpdateFormValue({ value: this.store.selectSnapshot(this.selectors.selectSelectedEntities)[0], path: 'users.form' }));
-        this.isEdit = true;
     }
 
     delete() {
