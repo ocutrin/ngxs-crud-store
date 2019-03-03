@@ -13,7 +13,9 @@ export interface StoreCrudStateSelectors {
     entities: (state: StoreCrudStateModel) => any[];
     selectEntities: (state: StoreCrudStateModel) => any[];
     selectSelectedEntities: (state: StoreCrudStateModel) => any[];
-    isSelectEntity: (state: StoreCrudStateModel) => boolean;
+    isSelectOneEntity: (state: StoreCrudStateModel) => boolean;
+    isSelectManyEntities: (state: StoreCrudStateModel) => boolean;
+    isSelectAllEntities: (state: StoreCrudStateModel) => boolean;
     error: (state: StoreCrudStateModel) => string;
 }
 
@@ -46,8 +48,18 @@ export class StoreCrudState {
     }
 
     @Selector()
-    private static isSelectEntity(state: StoreCrudStateModel, storeKey: string): boolean {
-        return state[storeKey].isSelectEntity;
+    private static isSelectOneEntity(state: StoreCrudStateModel, storeKey: string): boolean {
+        return state[storeKey].isSelectOneEntity;
+    }
+
+    @Selector()
+    private static isSelectManyEntities(state: StoreCrudStateModel, storeKey: string): boolean {
+        return state[storeKey].isSelectManyEntities;
+    }
+
+    @Selector()
+    private static isSelectAllEntities(state: StoreCrudStateModel, storeKey: string): boolean {
+        return state[storeKey].isSelectAllEntities;
     }
 
     @Selector()
@@ -61,7 +73,9 @@ export class StoreCrudState {
             entities: (state: StoreCrudStateModel) => StoreCrudState.entities(state, storeKey),
             selectEntities: (state: StoreCrudStateModel) => StoreCrudState.selectEntities(state, storeKey),
             selectSelectedEntities: (state: StoreCrudStateModel) => StoreCrudState.selectSelectedEntities(state, storeKey),
-            isSelectEntity: (state: StoreCrudStateModel) => StoreCrudState.isSelectEntity(state, storeKey),
+            isSelectOneEntity: (state: StoreCrudStateModel) => StoreCrudState.isSelectOneEntity(state, storeKey),
+            isSelectManyEntities: (state: StoreCrudStateModel) => StoreCrudState.isSelectManyEntities(state, storeKey),
+            isSelectAllEntities: (state: StoreCrudStateModel) => StoreCrudState.isSelectAllEntities(state, storeKey),
             error: (state: StoreCrudStateModel) => StoreCrudState.error(state, storeKey)
         };
     }
@@ -94,12 +108,19 @@ export class StoreCrudState {
     @Action(StoreCrudState.actions().selectedEntity(null as StoreCrudEntity))
     selectedEntity(context: StateContext<StoreCrudStateModel>, action: ActionFactory) {
         const state = context.getState();
+
         const unselectEntities = state.selectedEntities.filter(r => r.id === action.payload.id);
-        const unselect = unselectEntities.length === 0;
+
+        const unselect = unselectEntities.length === 0; // no esta seleccionada
+
+        const selectedEntities = unselect ? [...state.selectedEntities, ...action.payload] : [...state.selectedEntities.filter(r => r.id !== action.payload.id)];
+
         return context.patchState({
             ...state,
-            selectedEntities: action.payload && unselect ? [action.payload] : [],
-            isSelectEntity: action.payload && unselect ? true : false
+            selectedEntities: selectedEntities,
+            isSelectOneEntity: selectedEntities.length === 1 ? true : false,
+            isSelectManyEntities: selectedEntities.length > 1,
+            isSelectAllEntites: selectedEntities.length === state.entities.length
         });
     }
 
@@ -125,7 +146,7 @@ export class StoreCrudState {
                     ids: state.ids.filter((i: string) => i !== payload),
                     entities: state.entities.filter((e: StoreCrudEntity) => e.id !== payload),
                     selectedEntities: [],
-                    isSelectEntity: false
+                    isSelectOneEntity: false
                 });
             }), catchError((error) => this.error(context, error)));
     }

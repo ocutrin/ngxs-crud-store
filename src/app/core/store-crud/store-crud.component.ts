@@ -26,10 +26,22 @@ export abstract class StoreCrudComponent<T extends StoreCrudEntity> implements O
         return this._selectEntities$;
     }
 
-    private _isSelectEntity$: Observable<boolean>;
+    private _isSelectOneEntity$: Observable<boolean>;
 
-    get isSelectEtntity$() {
-        return this._isSelectEntity$;
+    get isSelectOneEntity$() {
+        return this._isSelectOneEntity$;
+    }
+
+    private _isSelectManyEntities$: Observable<boolean>;
+
+    get isSelectManyEntities$() {
+        return this._isSelectManyEntities$;
+    }
+
+    private _isSelectAllEntities$: Observable<boolean>;
+
+    get isSelectAllEntities$() {
+        return this._isSelectAllEntities$;
     }
 
     private _error$: Observable<string>;
@@ -63,7 +75,9 @@ export abstract class StoreCrudComponent<T extends StoreCrudEntity> implements O
         this._ids$ = this.store.select(this.selectors.ids);
         this._entities$ = this.store.select(this.selectors.entities);
         this._selectEntities$ = this.store.select(this.selectors.selectEntities);
-        this._isSelectEntity$ = this.store.select(this.selectors.isSelectEntity);
+        this._isSelectOneEntity$ = this.store.select(this.selectors.isSelectOneEntity);
+        this._isSelectManyEntities$ = this.store.select(this.selectors.isSelectManyEntities);
+        this._isSelectAllEntities$ = this.store.select(this.selectors.isSelectAllEntities);
         this._error$ = this.store.select(this.selectors.error);
     }
 

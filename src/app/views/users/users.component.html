@@ -1,10 +1,10 @@
 <div class="center">
 
-    <div class="btn-bar-control btn-bar-top" *ngIf="!isAdd">
-        <button type="button" (click)="add()" class="btn-add-top">Add</button>
+    <div class="btn-bar-control btn-bar-top" *ngIf="mode === 'list'">
+        <button type="button" class="btn-add" (click)="add()">Add</button>
     </div>
 
-    <form *ngIf="isAdd || isEdit" [formGroup]="form" class="form" ngxsForm="users.form">
+    <form *ngIf="mode !== 'list'" [formGroup]="form" class="form" ngxsForm="users.form">
         <div class="form-control">
             <input type="text" name="name" formControlName="name" placeholder="name">
         </div>
@@ -43,7 +43,7 @@
 
 <ul class="button-bar">
     <li><a (click)="search()">Search</a></li>
-    <li><a (click)="clear()" *ngIf="(entities$ | async).length > 0">Clear Store</a></li>
-    <li><a (click)="edit()" class="btn-edit" *ngIf="isSelectEtntity$ | async">Edit</a></li>
-    <li><a (click)="delete()" class="btn-delete" *ngIf="isSelectEtntity$ | async">Del</a></li>
+    <li><a (click)="clear()" *ngIf="(entities$ | async).length > 0">Clear</a></li>
+    <li><a (click)="edit()" class="btn-edit" *ngIf="isSelectOneEntity$ | async">Edit</a></li>
+    <li><a (click)="delete()" class="btn-delete" *ngIf="isSelectManyEntities$ | async">Del</a></li>
 </ul>

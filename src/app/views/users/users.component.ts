@@ -16,9 +16,7 @@ export class UsersComponent extends StoreCrudComponent<User> {
 
     title = 'Users';
 
-    isAdd = false;
-
-    isEdit = false;
+    mode: 'add' | 'edit' | 'list' = 'list';
 
     constructor(public store: Store, public formBuilder: FormBuilder) {
         super(UsersComponent.key, store, formBuilder);
@@ -37,44 +35,39 @@ export class UsersComponent extends StoreCrudComponent<User> {
         };
     }
 
-    selectRow(entity: any) {
-        super.selectRow(entity);
-        this.isAdd = false;
-    }
-
     save() {
-        if (this.isAdd) {
+        if (this.mode === 'add') {
             super.add();
-        } else if (this.isEdit) {
+        } else if (this.mode === 'edit') {
             super.edit();
         }
     }
 
     add() {
-        this.isAdd = true;
-        this.isEdit = false;
-    }
-
-    clear() {
-        super.clear();
-        this.isAdd = false;
+        this.mode = 'add';
     }
 
     edit() {
-        this.isAdd = false;
-        this.isEdit = true;
-        this.store.dispatch(
-            new UpdateFormValue({ value: this.store.selectSnapshot(this.selectors.selectSelectedEntities)[0], path: 'users.form' }));
+        this.mode = 'edit';
+        this.store.dispatch(new UpdateFormValue({
+            value: this.store.selectSnapshot(this.selectors.selectSelectedEntities)[0], path: 'users.form'
+        }));
     }
 
     delete() {
-        this.isEdit = this.isAdd = false;
         super.delete();
     }
 
     cancel() {
-        this.store.dispatch(new UpdateFormValue({ value: { name: '', password: '', active: true }, path: 'users.form' }));
-        this.isAdd = false;
+        this.mode = 'list';
+        this.store.dispatch(new UpdateFormValue({
+            value: { name: '', password: '', active: true }, path: 'users.form'
+        }));
+    }
+
+
+    click() {
+        console.log('click', event);
     }
 
 }

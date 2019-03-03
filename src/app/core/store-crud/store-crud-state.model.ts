@@ -4,7 +4,9 @@ export interface StoreCrudStateModel {
     ids: string[];
     entities: StoreCrudEntity[];
     selectedEntities: StoreCrudEntity[];
-    isSelectEntity: boolean;
+    isSelectOneEntity: boolean;
+    isSelectManyEntities: boolean;
+    isSelectAllEntites: boolean;
     form: {
         model: StoreCrudEntity,
         dirty: boolean,
@@ -18,7 +20,9 @@ export const initialState: StoreCrudStateModel = {
     ids: [],
     entities: [],
     selectedEntities: [],
-    isSelectEntity: false,
+    isSelectOneEntity: false,
+    isSelectManyEntities: false,
+    isSelectAllEntites: false,
     form: {
         model: undefined,
         dirty: false,
