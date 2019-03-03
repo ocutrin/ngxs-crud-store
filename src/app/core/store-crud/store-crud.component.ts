@@ -44,6 +44,12 @@ export abstract class StoreCrudComponent<T extends StoreCrudEntity> implements O
         return this._isSelectAllEntities$;
     }
 
+    private _mode$: Observable<'add' | 'edit' | 'list'>;
+
+    get mode$() {
+        return this._mode$;
+    }
+
     private _error$: Observable<string>;
 
     get error$() {
@@ -78,6 +84,7 @@ export abstract class StoreCrudComponent<T extends StoreCrudEntity> implements O
         this._isSelectOneEntity$ = this.store.select(this.selectors.isSelectOneEntity);
         this._isSelectManyEntities$ = this.store.select(this.selectors.isSelectManyEntities);
         this._isSelectAllEntities$ = this.store.select(this.selectors.isSelectAllEntities);
+        this._mode$ = this.store.select(this.selectors.mode);
         this._error$ = this.store.select(this.selectors.error);
     }
 

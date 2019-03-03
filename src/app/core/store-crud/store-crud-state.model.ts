@@ -7,6 +7,7 @@ export interface StoreCrudStateModel {
     isSelectOneEntity: boolean;
     isSelectManyEntities: boolean;
     isSelectAllEntites: boolean;
+    mode: 'add' | 'edit' | 'list';
     form: {
         model: StoreCrudEntity,
         dirty: boolean,
@@ -23,6 +24,7 @@ export const initialState: StoreCrudStateModel = {
     isSelectOneEntity: false,
     isSelectManyEntities: false,
     isSelectAllEntites: false,
+    mode: 'list',
     form: {
         model: undefined,
         dirty: false,

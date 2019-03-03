@@ -12,14 +12,10 @@ import { User } from './model/user.model';
 })
 export class UsersComponent extends StoreCrudComponent<User> {
 
-    static key = 'users';
-
     title = 'Users';
 
-    mode: 'add' | 'edit' | 'list' = 'list';
-
     constructor(public store: Store, public formBuilder: FormBuilder) {
-        super(UsersComponent.key, store, formBuilder);
+        super('users', store, formBuilder);
         this.error$.subscribe(error => {
             if (error) {
                 alert(error);
@@ -36,35 +32,24 @@ export class UsersComponent extends StoreCrudComponent<User> {
     }
 
     save() {
-        if (this.mode === 'add') {
-            super.add();
-        } else if (this.mode === 'edit') {
-            super.edit();
-        }
+        // super.add();
+        // super.edit();
     }
 
     add() {
-        this.mode = 'add';
+        this.store.dispatch(this.actions.setMode('add'));
     }
 
     edit() {
-        this.mode = 'edit';
-        this.store.dispatch(new UpdateFormValue({
-            value: this.store.selectSnapshot(this.selectors.selectSelectedEntities)[0], path: 'users.form'
-        }));
-    }
-
-    delete() {
-        super.delete();
+        this.store.dispatch(this.actions.setMode('edit'));
     }
 
     cancel() {
-        this.mode = 'list';
+        this.store.dispatch(this.actions.setMode('list'));
         this.store.dispatch(new UpdateFormValue({
             value: { name: '', password: '', active: true }, path: 'users.form'
         }));
     }
-
 
     click() {
         console.log('click', event);

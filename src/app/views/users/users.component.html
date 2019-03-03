@@ -1,10 +1,10 @@
 <div class="center">
 
-    <div class="btn-bar-control btn-bar-top" *ngIf="mode === 'list'">
+    <div class="btn-bar-control btn-bar-top" *ngIf="(mode$ | async) === 'list'">
         <button type="button" class="btn-add" (click)="add()">Add</button>
     </div>
 
-    <form *ngIf="mode !== 'list'" [formGroup]="form" class="form" ngxsForm="users.form">
+    <form *ngIf="(mode$ | async) !== 'list'" [formGroup]="form" class="form" ngxsForm="users.form">
         <div class="form-control">
             <input type="text" name="name" formControlName="name" placeholder="name">
         </div>

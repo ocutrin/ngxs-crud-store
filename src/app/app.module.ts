@@ -11,7 +11,6 @@ import { AppRoutingRoutingModule } from './app-routing-routing.module';
 import { AppComponent } from './app.component';
 import { StoreCrudPluginModule } from './core/store-crud/store-crud-plugin.module';
 import { HomeComponent } from './views/home/home.component';
-import { UsersComponent } from './views/users/users.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,7 @@ import { UsersComponent } from './views/users/users.component';
     NgxsFormPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
     NgxsModule.forRoot([], { developmentMode: environment.production }),
-    StoreCrudPluginModule.forRoot(UsersComponent.key),
+    StoreCrudPluginModule.forRoot('users'),
     AppRoutingRoutingModule
   ],
   bootstrap: [AppComponent]

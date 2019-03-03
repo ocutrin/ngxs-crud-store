@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { UpdateFormValue } from '@ngxs/form-plugin';
 import { Action, Actions, Selector, StateContext } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -16,6 +17,7 @@ export interface StoreCrudStateSelectors {
     isSelectOneEntity: (state: StoreCrudStateModel) => boolean;
     isSelectManyEntities: (state: StoreCrudStateModel) => boolean;
     isSelectAllEntities: (state: StoreCrudStateModel) => boolean;
+    mode: (state: StoreCrudStateModel) => 'add' | 'edit' | 'list';
     error: (state: StoreCrudStateModel) => string;
 }
 
@@ -63,6 +65,11 @@ export class StoreCrudState {
     }
 
     @Selector()
+    private static mode(state: StoreCrudStateModel, storeKey: string): 'add' | 'edit' | 'list' {
+        return state[storeKey].mode;
+    }
+
+    @Selector()
     private static error(state: StoreCrudStateModel, storeKey: string): string {
         return state[storeKey].error;
     }
@@ -76,6 +83,7 @@ export class StoreCrudState {
             isSelectOneEntity: (state: StoreCrudStateModel) => StoreCrudState.isSelectOneEntity(state, storeKey),
             isSelectManyEntities: (state: StoreCrudStateModel) => StoreCrudState.isSelectManyEntities(state, storeKey),
             isSelectAllEntities: (state: StoreCrudStateModel) => StoreCrudState.isSelectAllEntities(state, storeKey),
+            mode: (state: StoreCrudStateModel) => StoreCrudState.mode(state, storeKey),
             error: (state: StoreCrudStateModel) => StoreCrudState.error(state, storeKey)
         };
     }
@@ -108,13 +116,9 @@ export class StoreCrudState {
     @Action(StoreCrudState.actions().selectedEntity(null as StoreCrudEntity))
     selectedEntity(context: StateContext<StoreCrudStateModel>, action: ActionFactory) {
         const state = context.getState();
-
-        const unselectEntities = state.selectedEntities.filter(r => r.id === action.payload.id);
-
-        const unselect = unselectEntities.length === 0; // no esta seleccionada
-
-        const selectedEntities = unselect ? [...state.selectedEntities, ...action.payload] : [...state.selectedEntities.filter(r => r.id !== action.payload.id)];
-
+        const unselect = state.selectedEntities.filter(r => r.id === action.payload.id).length === 0;
+        const selectedEntities = unselect ? [...state.selectedEntities, ...action.payload]
+            : [...state.selectedEntities.filter(r => r.id !== action.payload.id)];
         return context.patchState({
             ...state,
             selectedEntities: selectedEntities,
@@ -151,8 +155,19 @@ export class StoreCrudState {
             }), catchError((error) => this.error(context, error)));
     }
 
+    @Action(StoreCrudState.actions().setMode(null as any))
+    setMode(context: StateContext<StoreCrudStateModel>, action: ActionFactory) {
+        const state = context.getState();
+        if (action.payload === 'edit') {
+            context.setState({ ...state, mode: action.payload });
+            return context.dispatch(new UpdateFormValue({ value: state.selectedEntities[0], path: 'users.form' }));
+        } else {
+            return context.setState({ ...state, mode: action.payload });
+        }
+    }
+
     @Action(StoreCrudState.actions().clearStore())
-    clearStore(context: StateContext<any>) {
+    clearStore(context: StateContext<StoreCrudStateModel>) {
         return context.setState(initialState);
     }
 

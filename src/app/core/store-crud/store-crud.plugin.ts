@@ -35,6 +35,10 @@ export function createStoreCrudPlugin(...storeKeys: string[]) {
                 if (action.type === generciAction.selectedEntity(null).type) {
                     return next(state, actionsStore.selectedEntity(action.payload));
                 }
+              
+                if (action.type === generciAction.setMode(null).type) {
+                    return next(state, actionsStore.setMode(action.payload));
+                }
 
             }
 
